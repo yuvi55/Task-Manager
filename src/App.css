@@ -142,3 +142,10 @@ h1 {
   cursor: pointer;
   color: #8758ff;
 }
+
+.error {
+  font-weight: bold;
+  color: red;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

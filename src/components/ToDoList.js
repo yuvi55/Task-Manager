@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import TodoItem from './ToDoItems.js';
+import { validateTodo } from './validations.js';
 
 export const TodoList = () => {
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState({ title: '', date: '', task: '' });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleInputChange = (e) => {
         setNewTodo({
@@ -13,10 +15,15 @@ export const TodoList = () => {
     };
 
     const handleAddTodo = () => {
-        if (newTodo.title && newTodo.date && newTodo.task) {
-            setTodos([...todos, newTodo]);
-            setNewTodo({ title: '', date: '', task: '' });
+        const validation = validateTodo(newTodo);
+        if (!validation.success) {
+            setErrorMessage(validation.message);
+            return;
         }
+
+        setTodos([...todos, newTodo]);
+        setNewTodo({ title: '', date: '', task: '' });
+        setErrorMessage('');
     };
 
     const handleRemoveTodo = (index) => {
@@ -31,7 +38,7 @@ export const TodoList = () => {
 
     return (
         <div className="container">
-            <h1>Task Manager: Get Organized !</h1>
+            <h1>Task Manager: Get Organized!</h1>
             <div className="TodoWrapper">
                 <input
                     type="text"
@@ -64,6 +71,7 @@ export const TodoList = () => {
                     Add Task
                 </button>
             </div>
+            {errorMessage && <div className="error">{errorMessage}</div>}
             <ul className="todo-list">
                 {sortedTodos.map((todo, index) => (
                     <TodoItem
@@ -78,4 +86,3 @@ export const TodoList = () => {
         </div>
     );
 };
-
