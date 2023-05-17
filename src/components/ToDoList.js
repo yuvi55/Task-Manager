@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import TodoItem from './ToDoItems.js';
 
 export const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -67,39 +66,16 @@ export const TodoList = () => {
             </div>
             <ul className="todo-list">
                 {sortedTodos.map((todo, index) => (
-                    <li key={index} className="Todo">
-                        <div>
-                            <div>
-                                <strong>Date:</strong> {todo.date}
-                            </div>
-                            <div>
-                                <strong>Title:</strong> {todo.title}
-                            </div>
-                            <div>
-                                <strong>Task:</strong> {todo.task}
-                            </div>
-                        </div>
-                        <div className="icon-wrapper">
-                            <FontAwesomeIcon
-                                icon={faTrash}
-                                onClick={() => handleRemoveTodo(index)}
-                            />
-                            <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                onClick={() => {
-                                    const newTitle = prompt('Enter new title', todo.title);
-                                    const newTask = prompt('Enter new task', todo.task);
-                                    handleEditTodo(index, {
-                                        ...todo,
-                                        title: newTitle || todo.title,
-                                        task: newTask || todo.task,
-                                    });
-                                }}
-                            />
-                        </div>
-                    </li>
+                    <TodoItem
+                        key={index}
+                        todo={todo}
+                        index={index}
+                        handleRemoveTodo={handleRemoveTodo}
+                        handleEditTodo={handleEditTodo}
+                    />
                 ))}
             </ul>
         </div>
     );
 };
+
