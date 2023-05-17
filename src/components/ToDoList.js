@@ -31,7 +31,7 @@ export const TodoList = () => {
 
     return (
         <div className="container">
-            <h1>Todo List</h1>
+            <h1>Task Manager: Get Organized !</h1>
             <div className="TodoWrapper">
                 <input
                     type="text"
