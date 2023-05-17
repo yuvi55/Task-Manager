@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -66,24 +69,18 @@ export const TodoList = () => {
                     <li key={index} className="Todo">
                         <div>
                             <div>
-                                <strong>Title:</strong> {todo.title}
+                                <strong>Date:</strong> {todo.date}
                             </div>
                             <div>
-                                <strong>Date:</strong> {todo.date}
+                                <strong>Title:</strong> {todo.title}
                             </div>
                             <div>
                                 <strong>Task:</strong> {todo.task}
                             </div>
                         </div>
-                        <button
-                            className="remove_button"
-                            onClick={() => handleRemoveTodo(index)}
-                        >
-                            Remove
-                        </button>
-                        <button
-                            className="edit_button"
-                            onClick={() => {
+                        <div className='icon-wrapper'>
+                            <FontAwesomeIcon icon={faTrash} onClick={() => handleRemoveTodo(index)} />
+                            <FontAwesomeIcon icon={faPenToSquare} onClick={() => {
                                 const newTitle = prompt('Enter new title', todo.title);
                                 const newTask = prompt('Enter new task', todo.task);
                                 handleEditTodo(index, {
@@ -91,10 +88,9 @@ export const TodoList = () => {
                                     title: newTitle || todo.title,
                                     task: newTask || todo.task,
                                 });
-                            }}
-                        >
-                            Edit
-                        </button>
+                            }} />
+                        </div>
+
                     </li>
                 ))}
             </ul>

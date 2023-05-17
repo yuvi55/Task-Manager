@@ -81,14 +81,6 @@ h1 {
   margin-top: 0.5rem;
 }
 
-.todo-list li .remove_button {
-  background: #ff5858;
-}
-
-.todo-list li .edit_button {
-  background: #8758ff;
-}
-
 .todo-item {
   margin-bottom: 0.5rem;
 }
@@ -137,4 +129,16 @@ h1 {
 
 .todo-input::placeholder {
   color: #888;
+}
+
+.icon-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  /* Adjust the spacing between icons as needed */
+}
+
+.icon-wrapper>svg {
+  cursor: pointer;
+  color: #8758ff;
 }
