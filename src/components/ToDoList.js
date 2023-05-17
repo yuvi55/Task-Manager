@@ -37,6 +37,7 @@ export const TodoList = () => {
                     onChange={handleInputChange}
                     className="title_input todo-input"
                     placeholder="Title for Task"
+                    required
                 />
                 <input
                     type="date"
@@ -45,6 +46,7 @@ export const TodoList = () => {
                     onChange={handleInputChange}
                     className="date_input todo-input"
                     placeholder="Date"
+                    required
                 />
                 <input
                     type="text"
@@ -53,6 +55,7 @@ export const TodoList = () => {
                     value={newTodo.task}
                     onChange={handleInputChange}
                     placeholder="Task Description"
+                    required
                 />
                 <button className="todo-btn" onClick={handleAddTodo}>
                     Add Task
