@@ -7,7 +7,7 @@
 5) You should be now be redirected to the landing page of the project
 
 
-#Features Implemented:
+# Features Implemented:
 1)Users are able to add tasks with a title and description.
 2)Users are able to view a list of tasks, sorted by date created.
 3)Users are able to edit existing tasks (title and description).
