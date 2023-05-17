@@ -1,10 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export const ToDoItem = ({ todo, index, handleRemoveTodo, handleEditTodo }) => {
+export const TodoItem = ({ todo, index, handleRemoveTodo, handleEditTodo, handleToggleComplete }) => {
+    const handleToggle = () => {
+        handleToggleComplete(index);
+    };
+
     return (
-        <li className="Todo">
+        <li className={`Todo ${todo.completed ? 'completed' : ''}`}>
             <div>
                 <div>
                     <strong>Date:</strong> {todo.date}
@@ -35,9 +39,13 @@ export const ToDoItem = ({ todo, index, handleRemoveTodo, handleEditTodo }) => {
                     }}
                     className="todo-icon"
                 />
+                <FontAwesomeIcon
+                    icon={faCheck}
+                    onClick={handleToggle} className="todo-icon"
+                />
             </div>
         </li>
     );
 };
 
-export default ToDoItem; 
+export default TodoItem;

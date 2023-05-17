@@ -4,7 +4,7 @@ import { validateTodo } from './validations.js';
 
 export const TodoList = () => {
     const [todos, setTodos] = useState([]);
-    const [newTodo, setNewTodo] = useState({ title: '', date: '', task: '' });
+    const [newTodo, setNewTodo] = useState({ title: '', date: '', task: '', completed: false });
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleInputChange = (e) => {
@@ -21,8 +21,8 @@ export const TodoList = () => {
             return;
         }
 
-        setTodos([...todos, newTodo]);
-        setNewTodo({ title: '', date: '', task: '' });
+        setTodos([...todos, { ...newTodo, completed: false }]);
+        setNewTodo({ title: '', date: '', task: '', completed: false });
         setErrorMessage('');
     };
 
@@ -32,6 +32,14 @@ export const TodoList = () => {
 
     const handleEditTodo = (index, updatedTodo) => {
         setTodos(todos.map((todo, i) => (i === index ? updatedTodo : todo)));
+    };
+
+    const handleToggleComplete = (index) => {
+        setTodos(
+            todos.map((todo, i) =>
+                i === index ? { ...todo, completed: !todo.completed } : todo
+            )
+        );
     };
 
     const sortedTodos = todos.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -80,9 +88,12 @@ export const TodoList = () => {
                         index={index}
                         handleRemoveTodo={handleRemoveTodo}
                         handleEditTodo={handleEditTodo}
+                        handleToggleComplete={handleToggleComplete}
                     />
                 ))}
             </ul>
         </div>
     );
 };
+
+export default TodoList;
