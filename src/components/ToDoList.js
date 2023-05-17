@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -28,6 +27,8 @@ export const TodoList = () => {
     const handleEditTodo = (index, updatedTodo) => {
         setTodos(todos.map((todo, i) => (i === index ? updatedTodo : todo)));
     };
+
+    const sortedTodos = todos.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     return (
         <div className="container">
@@ -65,7 +66,7 @@ export const TodoList = () => {
                 </button>
             </div>
             <ul className="todo-list">
-                {todos.map((todo, index) => (
+                {sortedTodos.map((todo, index) => (
                     <li key={index} className="Todo">
                         <div>
                             <div>
@@ -78,19 +79,24 @@ export const TodoList = () => {
                                 <strong>Task:</strong> {todo.task}
                             </div>
                         </div>
-                        <div className='icon-wrapper'>
-                            <FontAwesomeIcon icon={faTrash} onClick={() => handleRemoveTodo(index)} />
-                            <FontAwesomeIcon icon={faPenToSquare} onClick={() => {
-                                const newTitle = prompt('Enter new title', todo.title);
-                                const newTask = prompt('Enter new task', todo.task);
-                                handleEditTodo(index, {
-                                    ...todo,
-                                    title: newTitle || todo.title,
-                                    task: newTask || todo.task,
-                                });
-                            }} />
+                        <div className="icon-wrapper">
+                            <FontAwesomeIcon
+                                icon={faTrash}
+                                onClick={() => handleRemoveTodo(index)}
+                            />
+                            <FontAwesomeIcon
+                                icon={faPenToSquare}
+                                onClick={() => {
+                                    const newTitle = prompt('Enter new title', todo.title);
+                                    const newTask = prompt('Enter new task', todo.task);
+                                    handleEditTodo(index, {
+                                        ...todo,
+                                        title: newTitle || todo.title,
+                                        task: newTask || todo.task,
+                                    });
+                                }}
+                            />
                         </div>
-
                     </li>
                 ))}
             </ul>
